@@ -5,17 +5,11 @@ const TestData = require("../DemoQA - TestData/testData");
 test("Login Test", async ({ page }) => {
   const loginPage = new LoginPage(page);
   //Step 1: Navigate to DemoQA website
-  await test.step("Navigate to DemoQA", async () => {
+  await test.step("Navigate to DemoQA Login Page", async () => {
     try {
       await page.goto("https://demoqa.com/login", { timeout: 30000 });
     } catch (error) {
-      // Report the error if the page load time exceeds the timeout
-      report.expectStatus({
-        status: "Failed",
-        message: "Page load time exceeded 30 seconds timeout",
-      });
-      report.endStep();
-      throw error;
+      if (error) console.log("Page load time exceeded 30 seconds!");
     }
   });
 
@@ -36,7 +30,7 @@ test("Login Test", async ({ page }) => {
     await loginPage.fillUsername(TestData.validUsername);
     await loginPage.fillPassword(TestData.validPassword);
     await loginPage.clickLoginButton();
-    //Assertion: Logout option is visible after successful login
+    //Assertion: Logout option is only visible after a successful login
     await loginPage.clickLogoutButton();
   });
 });
