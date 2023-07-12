@@ -33,7 +33,7 @@ test("BookStore: Add Book to Collection", async ({ page }) => {
 
   //Step 4: Search, Select and Add Book to Collection
   await test.step("Search book and add to Collection", async () => {
-    await bookStorePage.searchKeyword(TestData.validAuthor);
+    await bookStorePage.searchKeyword(TestData.validTitle);
     await bookStorePage.clickOnFirstLink();
     //Alert message to be logged to the report
     await bookStorePage.addToCollection();
