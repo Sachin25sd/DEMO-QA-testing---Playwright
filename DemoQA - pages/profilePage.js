@@ -20,10 +20,11 @@ class ProfilePage {
   }
 
   async deleteBook() {
-    await page.locator(
-      "#app > div > div > div.row > div.col-12.mt-4.col-md-6 > div.profile-wrapper > div.ReactTable.-striped.-highlight > div.rt-table > div.rt-tbody > div:nth-child(1) > div > div:nth-child(5) > div"
-    );
-    await page.getByRole("button", { name: "OK" }).click();
+    await this.page
+      .getByRole("gridcell", { name: "Delete" })
+      .locator("path")
+      .click();
+    await this.page.getByRole("button", { name: "OK" }).click();
   }
 }
 module.exports = ProfilePage;

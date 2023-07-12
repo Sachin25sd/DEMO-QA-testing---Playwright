@@ -8,11 +8,11 @@ class LoginPage {
   }
 
   async fillUsername(username) {
-    await this.page.fill('input[placeholder="UserName"]', username);
+    await this.page.getByPlaceholder("UserName").fill(username);
   }
 
   async fillPassword(password) {
-    await this.page.fill('input[placeholder="Password"]', password);
+    await this.page.getByPlaceholder("Password").fill(password);
   }
 
   async clickLoginButton() {

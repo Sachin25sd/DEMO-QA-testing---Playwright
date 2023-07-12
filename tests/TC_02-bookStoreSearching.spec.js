@@ -10,9 +10,9 @@ test("BookStore: Searching for Books", async ({ page }) => {
   //Step 1: Navigate to DemoQA website
   await test.step("Navigate to DemoQA", async () => {
     try {
-      await page.goto("https://demoqa.com/login", { timeout: 30000 });
+      await page.goto("https://demoqa.com/login", { timeout: 25000 });
     } catch (error) {
-      if (error) console.log("Attention!! Page load time exceeded 30 seconds!");
+      if (error) console.log("Attention!! Page load time exceeded 25 seconds!");
     }
   });
 
@@ -21,7 +21,6 @@ test("BookStore: Searching for Books", async ({ page }) => {
     await loginPage.fillUsername(TestData.validUsername1);
     await loginPage.fillPassword(TestData.validPassword1);
     await loginPage.clickLoginButton();
-    //Assertion: Confirm successful login by checking for the logged in username
     const locator = page.locator("#userName-value");
     await expect(locator).toHaveText(TestData.validUsername1);
   });

@@ -21,7 +21,6 @@ test("BookStore: Add Book to Collection", async ({ page }) => {
     await loginPage.fillUsername(TestData.validUsername1);
     await loginPage.fillPassword(TestData.validPassword1);
     await loginPage.clickLoginButton();
-    //Assertion: Confirm successful login by checking for the logged in username
     const locator = page.locator("#userName-value");
     await expect(locator).toHaveText(TestData.validUsername1);
   });
@@ -35,11 +34,11 @@ test("BookStore: Add Book to Collection", async ({ page }) => {
   await test.step("Search book and add to Collection", async () => {
     await bookStorePage.searchKeyword(TestData.validTitle);
     await bookStorePage.clickOnFirstLink();
-    //Alert message to be logged to the report
     await bookStorePage.addToCollection();
-    const dialog = await page.waitForEvent("dialog"); // Wait for the alert dialog
-    const message = dialog.message(); // Get the message from the alert
-    console.log("Book Added Confirmation:", message); // Log the message to the default Playwright report
+    //Assertoon: Handle Alert message that confirms book has been added to Collection
+    const dialog = await page.waitForEvent("dialog");
+    const message = dialog.message();
+    console.log("Book Added Confirmation:", message);
     await dialog.accept();
   });
 });

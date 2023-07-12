@@ -10,10 +10,9 @@ test("Profile Page: Confirm and Delete Books", async ({ page }) => {
   //Step 1: Navigate to DemoQA website
   await test.step("Navigate to DemoQA", async () => {
     try {
-      await page.goto("https://demoqa.com/login", { timeout: 30000 });
+      await page.goto("https://demoqa.com/login", { timeout: 25000 });
     } catch (error) {
-      //Timeout error to be included in Report
-      if (error) console.log("Attention!! Page load time exceeded 30 seconds!");
+      if (error) console.log("Attention!! Page load time exceeded 25 seconds!");
     }
   });
   //Step 2: Login
@@ -21,7 +20,6 @@ test("Profile Page: Confirm and Delete Books", async ({ page }) => {
     await loginPage.fillUsername(TestData.validUsername1);
     await loginPage.fillPassword(TestData.validPassword1);
     await loginPage.clickLoginButton();
-    //Assertion: Confirm successful login by checking for the logged in username
     const locator = page.locator("#userName-value");
     await expect(locator).toHaveText(TestData.validUsername1);
   });
@@ -36,10 +34,20 @@ test("Profile Page: Confirm and Delete Books", async ({ page }) => {
 
   //Step 4: Delete book from Collection
   await test.step("Delete book from collection", async () => {
-    try {
-      await profilePage.navigateToProfile();
-    } catch (error) {}
-    //await profilePage.confirmBook(TestData.validTitle);
-    //await profilePage.deleteBook();
+    await profilePage.navigateToProfile();
+    // Assertion: Check for navigation error
+    if (page.getByRole("button", { name: "Back To Book Store" }).isVisible()) {
+      console.log(
+        "Error!! Page did not navigate back to the profile page from Book details"
+      );
+      await page.reload();
+    }
+    await profilePage.confirmBook(TestData.validTitle);
+    await profilePage.deleteBook();
+    //Assertion: Handle book deleted confirmation and log into console
+    const dialog = await page.waitForEvent("dialog");
+    const message = dialog.message();
+    console.log("Book Deleted Confirmation:", message);
+    await dialog.accept();
   });
 });

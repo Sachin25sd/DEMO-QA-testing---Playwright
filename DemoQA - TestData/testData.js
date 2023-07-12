@@ -10,4 +10,6 @@ module.exports = {
   validPublisher: "No Starch Press",
   invalidSearchString1: "",
   invalidSearchString2: "*",
+  collectionFullUser: "CollectionFull",
+  collectionFullPassword: "CollectionFull1!",
 };
