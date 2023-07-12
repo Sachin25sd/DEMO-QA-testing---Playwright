@@ -3,16 +3,16 @@ const LoginPage = require("../DemoQA - pages/loginPage");
 const TestData = require("../DemoQA - TestData/testData");
 const BookStorePage = require("../DemoQA - pages/bookStorePage");
 
-test("Login Test", async ({ page }) => {
+test("BookStore: Searching for Books", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const bookStorePage = new BookStorePage(page);
 
   //Step 1: Navigate to DemoQA website
   await test.step("Navigate to DemoQA", async () => {
     try {
-      await page.goto("https://demoqa.com/login", { timeout: 10000 });
+      await page.goto("https://demoqa.com/login", { timeout: 30000 });
     } catch (error) {
-      if (error) console.log("Page load time exceeded 30 seconds!");
+      if (error) console.log("Attention!! Page load time exceeded 30 seconds!");
     }
   });
 

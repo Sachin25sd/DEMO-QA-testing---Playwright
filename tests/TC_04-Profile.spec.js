@@ -1,11 +1,12 @@
 import { test, expect } from "@playwright/test";
-const BookStorePage = require("../DemoQA - pages/bookStorePage");
 const LoginPage = require("../DemoQA - pages/loginPage");
 const TestData = require("../DemoQA - TestData/testData");
+const ProfilePage = require("../DemoQA - pages/profilePage");
 
-test("BookStore: Add Book to Collection", async ({ page }) => {
+test("Profile Page: Confirm and Delete Books", async ({ page }) => {
   const loginPage = new LoginPage(page);
-  const bookStorePage = new BookStorePage(page);
+  const profilePage = new ProfilePage(page);
+
   //Step 1: Navigate to DemoQA website
   await test.step("Navigate to DemoQA", async () => {
     try {
@@ -15,8 +16,7 @@ test("BookStore: Add Book to Collection", async ({ page }) => {
       if (error) console.log("Attention!! Page load time exceeded 30 seconds!");
     }
   });
-
-  // Step 2: Login
+  //Step 2: Login
   await test.step("Login", async () => {
     await loginPage.fillUsername(TestData.validUsername1);
     await loginPage.fillPassword(TestData.validPassword1);
@@ -26,20 +26,11 @@ test("BookStore: Add Book to Collection", async ({ page }) => {
     await expect(locator).toHaveText(TestData.validUsername1);
   });
 
-  //Step 3: Load Book Store
-  await test.step("Load BookStore page", async () => {
-    await bookStorePage.navigateToBookStore();
+  //Step 3: Confirm book added on TC_03 is available
+  await test.step("Confirm book is available on Profile Collection", async () => {
+    await profilePage.navigateToProfile();
   });
 
-  //Step 4: Search, Select and Add Book to Collection
-  await test.step("Search book and add to Collection", async () => {
-    await bookStorePage.searchKeyword(TestData.validAuthor);
-    await bookStorePage.clickOnFirstLink();
-    //Alert message to be logged to the report
-    await bookStorePage.addToCollection();
-    const dialog = await page.waitForEvent("dialog"); // Wait for the alert dialog
-    const message = dialog.message(); // Get the message from the alert
-    console.log("Book Added Confirmation:", message); // Log the message to the default Playwright report
-    await dialog.accept();
-  });
+  //Step 4: Delete book from Collection
+  await test.step("Delete book from collection", async () => {});
 });

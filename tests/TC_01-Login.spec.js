@@ -9,7 +9,7 @@ test("Login Test", async ({ page }) => {
     try {
       await page.goto("https://demoqa.com/login", { timeout: 30000 });
     } catch (error) {
-      if (error) console.log("Page load time exceeded 30 seconds!");
+      if (error) console.log("Attention!! Page load time exceeded 30 seconds!");
     }
   });
 
