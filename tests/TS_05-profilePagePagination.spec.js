@@ -42,7 +42,7 @@ test("Profile Page: Confirm and Delete Books", async ({ page }) => {
   //Step 4: Check Pagination number update feature
   await test.step("D", async () => {
     //Function asserts page values
-    await paginationPage.updatePagniationPageNumber();
+    await paginationPage.updatePaginationPageNumber();
   });
 
   //Step 5: Check ability to change rows
