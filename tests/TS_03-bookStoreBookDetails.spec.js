@@ -9,10 +9,10 @@ test("BookStore: Add Book to Collection", async ({ page }) => {
   //Step 1: Navigate to DemoQA website
   await test.step("Navigate to DemoQA", async () => {
     try {
-      await page.goto("https://demoqa.com/login", { timeout: 30000 });
+      await page.goto("https://demoqa.com/login", { timeout: 25000 });
     } catch (error) {
       //Timeout error to be included in Report
-      if (error) console.log("Attention!! Page load time exceeded 30 seconds!");
+      if (error) console.log("Attention!! Page load time exceeded 25 seconds!");
     }
   });
 

@@ -27,7 +27,7 @@ test("Profile Page: Confirm and Delete Books", async ({ page }) => {
   });
 
   //Step 3: Check Previous and Next buttons are functioning
-  await test.step("Check Next button is enabled and Previous button is disabled", async () => {
+  await test.step("Page navigation is working correctly: Next & Previous", async () => {
     await profilePage.navigateToProfile();
     //Assertion: confirms previous button is disabled, returns false if true
     await paginationPage.previousButtonDisabled();
@@ -39,6 +39,18 @@ test("Profile Page: Confirm and Delete Books", async ({ page }) => {
     await paginationPage.nextButtonVisible();
   });
 
-  //Step 4:
-  await test.step("D", async () => {});
+  //Step 4: Check Pagination number update feature
+  await test.step("D", async () => {
+    //Function asserts page values
+    await paginationPage.updatePagniationPageNumber();
+  });
+
+  //Step 5: Check ability to change rows
+  await test.step("D", async () => {
+    await paginationPage.changeRow();
+    //Assertion to check 100th row is visible
+    await page
+      .locator("div:nth-child(100) > .rt-tr > div:nth-child(2)")
+      .isVisible();
+  });
 });
